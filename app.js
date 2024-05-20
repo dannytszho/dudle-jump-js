@@ -65,6 +65,7 @@ window.onload = function () {
 
   drawStartButton();
   board.addEventListener("click", handleCanvasClick);
+  window.addEventListener("deviceorientation", handleOrientation, true);
 };
 
 function drawStartButton() {
@@ -104,7 +105,6 @@ function startGame() {
   placePlatforms();
   requestAnimationFrame(update);
   document.addEventListener("keydown", moveDoodler);
-  window.addEventListener("deviceorientation", handleOrientation, true);
 }
 
 function update() {
@@ -225,10 +225,11 @@ function moveDoodler(e) {
     board.addEventListener("click", handleCanvasClick);
   }
 }
+console.log("object");
 
 function handleOrientation(event) {
+  console.log(event);
   let gamma = event.gamma; // Left-to-right tilt in degrees, range [-90,90]
-  console.log(gamma);
 
   if (gamma > 15) {
     // Tilted right
