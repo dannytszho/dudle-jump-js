@@ -104,7 +104,7 @@ function startGame() {
   placePlatforms();
   requestAnimationFrame(update);
   document.addEventListener("keydown", moveDoodler);
-  window.addEventListener("deviceorientation", handleOrientation);
+  window.addEventListener("deviceorientation", handleOrientation, true);
 }
 
 function update() {
@@ -228,6 +228,7 @@ function moveDoodler(e) {
 
 function handleOrientation(event) {
   let gamma = event.gamma; // Left-to-right tilt in degrees, range [-90,90]
+  console.log(gamma);
 
   if (gamma > 15) {
     // Tilted right
