@@ -104,6 +104,7 @@ function startGame() {
   placePlatforms();
   requestAnimationFrame(update);
   document.addEventListener("keydown", moveDoodler);
+  window.addEventListener("deviceorientation", handleOrientation);
 }
 
 function update() {
@@ -222,6 +223,23 @@ function moveDoodler(e) {
     placePlatforms();
     drawStartButton();
     board.addEventListener("click", handleCanvasClick);
+  }
+}
+
+function handleOrientation(event) {
+  let gamma = event.gamma; // Left-to-right tilt in degrees, range [-90,90]
+
+  if (gamma > 15) {
+    // Tilted right
+    velocityX = 2; // Adjust this value as needed
+    doodler.img = doodlerRightImg;
+  } else if (gamma < -15) {
+    // Tilted left
+    velocityX = -2; // Adjust this value as needed
+    doodler.img = doodlerLeftImg;
+  } else {
+    // Centered
+    velocityX = 0;
   }
 }
 
